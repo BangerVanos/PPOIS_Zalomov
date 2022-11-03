@@ -7,6 +7,8 @@
 #include <utility>
 #include <string>
 #include <regex>
+#include "Functions.h"
+#include "Exceptions.h"
 
 enum token_type {
 	number,
@@ -22,7 +24,8 @@ enum token_type {
 class TokenBuffer {
 private:
 	std::string buffer;
-	std::vector <char> SEPS{ ' ', '\n', ',' };
+	std::vector <char> SEPS{ ' ', '\0', ',' };
+	const std::vector <std::string> OPERATORS{ "+", "-", "*", "/", "^" };
 	std::vector <std::string> readyTokens;
 public:
 	TokenBuffer(std::string buffer);
@@ -41,4 +44,34 @@ private:
 	std::pair <std::string, token_type> readToken(const std::string& token);
 	std::vector <std::pair <std::string, token_type>> token_info;
 	const std::vector <std::string> OPERATORS{"+", "-", "*", "/", "^"};
+};
+
+
+class FunctionAnalyzer {
+public:
+	FunctionAnalyzer(const std::vector <std::pair <std::string, token_type>>& token_info);
+	void parse_function_arguments();
+	std::vector <std::pair <std::string, std::vector<std::string>>> GetFuncNArguments();
+private:
+	std::vector <std::pair <std::string, token_type>> token_info;
+	std::vector <std::pair <std::string, std::vector<std::string>>> func_n_arguments;
+};
+
+class FunctionSolver {
+public:
+	FunctionSolver(const std::vector <std::pair <std::string, std::vector<std::string>>>& func_n_arguments);
+	void solve();
+	std::vector <std::string> GetSolvedFunc();
+private:
+	std::vector <std::pair <std::string, std::vector<std::string>>> func_n_arguments;
+	std::vector <std::string> solved_funcs;
+};
+
+class TokenFunctionReplacer {
+public:
+	TokenFunctionReplacer(const std::vector <std::pair <std::string, token_type>>& token_info);
+	void replace_functions();
+	std::vector <std::pair <std::string, token_type>> GetTokenInfo();
+private:
+	std::vector <std::pair <std::string, token_type>> token_info;
 };

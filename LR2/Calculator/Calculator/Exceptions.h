@@ -3,10 +3,11 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 
 
 
-class BaseException {
+class BaseException : public std::exception {
 protected:
 	std::string exception_text;
 public:
@@ -40,9 +41,14 @@ public:
 	FunctionDoesntExist(const std::string& func_name);
 };
 
-class FunctionWrongArgumentAmount : public FunctionException {
+class FunctionWrongArgumentAmount final : public FunctionException {
 public:
 	FunctionWrongArgumentAmount(const std::string& func_name, int user_argument_amount, int argument_amount);
+};
+
+class FunctionNoCloseParenthesis final : public FunctionException {
+public:
+	FunctionNoCloseParenthesis();
 };
 
 class TokenException : public BaseException {
@@ -51,6 +57,6 @@ public:
 	TokenException(const std::string& exception_text);
 };
 
-class TokenUnresolvedException : public TokenException {
+class TokenUnresolvedException final : public TokenException {
 	TokenUnresolvedException();
 };

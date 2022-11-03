@@ -13,5 +13,5 @@ private:
 	const std::vector<std::string> UNARY_FUNCS{"sin", "cos", "abs", "ln", "log", "sqrt"};
 	const std::vector<std::string> BINARY_FUNCS{ "pow", "max", "min" };
 public:
-	double count_func(const std::string& func_name, int arg_count, double first_arg, ...);
+	double count_func(const std::string& func_name, const std::vector <double> func_args);
 };

@@ -37,6 +37,10 @@ FunctionWrongArgumentAmount::FunctionWrongArgumentAmount(const std::string& func
 	exception_text = "Error. Function " + func_name + " takes " + std::to_string(argument_amount) + ", but you've passed " + std::to_string(user_argument_amount);
 }
 
+FunctionNoCloseParenthesis::FunctionNoCloseParenthesis() {
+	exception_text = "Error. No close parenthesis for function";
+}
+
 TokenException::TokenException() {
 	exception_text = "Error. Token error.";
 }
