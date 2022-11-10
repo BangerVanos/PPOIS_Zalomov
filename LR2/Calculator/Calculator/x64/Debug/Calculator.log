@@ -1,0 +1,11 @@
+﻿  ArithmeticTree.cpp
+  Calculator.cpp
+  Exceptions.cpp
+  Functions.cpp
+D:\Programms\Programming\BSUIR\PPOIS_Zalomov\LR2\Calculator\Calculator\Functions.cpp(11,68): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Programms\Programming\BSUIR\PPOIS_Zalomov\LR2\Calculator\Calculator\Functions.cpp(25,68): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+  Tokens.cpp
+  Variables.cpp
+  Создание кода...
+MSVCRTD.lib(exe_main.obj) : error LNK2019: ссылка на неразрешенный внешний символ main в функции "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ).
+D:\Programms\Programming\BSUIR\PPOIS_Zalomov\LR2\Calculator\x64\Debug\Calculator.exe : fatal error LNK1120: неразрешенных внешних элементов: 1

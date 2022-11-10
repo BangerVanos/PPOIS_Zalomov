@@ -2,7 +2,7 @@
 #include "Exceptions.h"
 
 
-double Functions::count_func(const std::string& func_name, const std::vector <double> func_args) {
+double Functions::count_func(std::string func_name, std::vector <double> func_args) {
 	if ((std::find(BINARY_FUNCS.begin(), BINARY_FUNCS.end(), func_name) == BINARY_FUNCS.end()) || (std::find(UNARY_FUNCS.begin(), UNARY_FUNCS.end(), func_name) == UNARY_FUNCS.end())) {
 		throw FunctionDoesntExist(func_name);
 	}
@@ -44,4 +44,16 @@ double Functions::count_func(const std::string& func_name, const std::vector <do
 		}
 	}
 	throw FunctionException();
+}
+
+std::string Functions::func_type(std::string func_name) {
+	if (std::find(BINARY_FUNCS.begin(), BINARY_FUNCS.end(), func_name) != BINARY_FUNCS.end()) {
+		return "Binary";
+	}
+	else if (std::find(UNARY_FUNCS.begin(), UNARY_FUNCS.end(), func_name) != UNARY_FUNCS.end()) {
+		return "Unary";
+	}
+	else {
+		return "NotFunction";
+	}
 }

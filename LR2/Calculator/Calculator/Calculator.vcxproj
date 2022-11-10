@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ArithmeticTree.h" />
+    <ClInclude Include="Solver.h" />
     <ClInclude Include="Calculator.h" />
     <ClInclude Include="Exceptions.h" />
     <ClInclude Include="Functions.h" />
@@ -147,9 +147,11 @@
     <ClInclude Include="Variables.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Solver.cpp" />
     <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="Exceptions.cpp" />
     <ClCompile Include="Functions.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Tokens.cpp" />
     <ClCompile Include="Variables.cpp" />
   </ItemGroup>

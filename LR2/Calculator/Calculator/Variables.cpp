@@ -1,7 +1,7 @@
 #include "Variables.h"
 #include "Exceptions.h"
 
-void Variables::addOrChangeVar(const std::string& var_name, double var_value)
+void Variables::addOrChangeVar(std::string var_name, double var_value)
 {
 	if (CONST_VARS.find(var_name) != CONST_VARS.end()) {
 		throw VariableAlreadyExists(var_name);
@@ -16,7 +16,7 @@ void Variables::addOrChangeVar(const std::string& var_name, double var_value)
 	vars[var_name] = var_value;	
 }
 
-double Variables::callVariable(const std::string& var_name) {
+double Variables::callVariable(std::string var_name) {
 	try {
 		return CONST_VARS.at(var_name);
 	}
