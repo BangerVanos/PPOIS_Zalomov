@@ -143,7 +143,7 @@ ExpressionSolver::ExpressionSolver(std::vector<Lexeme> tokens) {
 	this->tokens = tokens;
 }
 
-double ExpressionSolver::solve() {
+double ExpressionSolver::solve() {	
 	std::vector<Lexeme>::iterator it = tokens.begin();	
 	double value = 0;
 	while (it != tokens.end()) {
@@ -156,7 +156,7 @@ double ExpressionSolver::solve() {
 		}
 		else if (it->getTokenType() == TokenType::r_parenthesis) {
 			if (operators_stack.top().getTokenType() != TokenType::l_parenthesis) {
-				continue;
+				ExpressionSolver::solve_operator();
 			}
 			else {
 				operators_stack.pop();
@@ -174,77 +174,89 @@ double ExpressionSolver::solve() {
 					it++;
 				}
 				else {
-					if (operators_stack.top().getTokenType() == TokenType::operation) {
-						if (operators_stack.top().getTokenValue() == "-u") {
-							values_stack.top().setTokenValue(std::to_string(-std::stod(values_stack.top().getTokenValue())));
-							operators_stack.pop();
-						}
-						else {
-							std::vector<double> args;
-							for (int i = 0; i < 2; i++) {
-								if (values_stack.top().getTokenType() == TokenType::number) {
-									args.push_back(std::stod(values_stack.top().getTokenValue()));									
-								}
-								else {
-									Variables vars;
-									args.push_back(vars.callVariable(values_stack.top().getTokenValue()));
-								}
-								values_stack.pop();
-							}
-							double result = 0;
-							if (operators_stack.top().getTokenValue() == "-") {
-								result = args[1] - args[0];
-							}
-							else if (operators_stack.top().getTokenValue() == "+") {
-								result = args[1] + args[0];
-							}
-							else if (operators_stack.top().getTokenValue() == "/") {
-								result = args[1] / args[0];
-							}
-							else if (operators_stack.top().getTokenValue() == "*") {
-								result = args[1] * args[0];
-							}
-							else if (operators_stack.top().getTokenValue() == "^") {
-								result = pow(args[1], args[0]);
-							}
-							operators_stack.pop();
-							Lexeme new_value(std::to_string(result), TokenType::number, 0, 0);
-						}
-					}
-					else if (operators_stack.top().getTokenType() == TokenType::function) {
-						Functions func_solver;
-						std::vector<double> args;
-						if (func_solver.func_type(operators_stack.top().getTokenValue()) == "Binary") {
-							for (int i = 0; i < 2; i++) {
-								if (values_stack.top().getTokenType() == TokenType::number) {
-									args.push_back(std::stod(values_stack.top().getTokenValue()));
-								}
-								else {
-									Variables vars;
-									args.push_back(vars.callVariable(values_stack.top().getTokenValue()));
-								}
-								values_stack.pop();
-							}
-						}
-						else {
-							if (values_stack.top().getTokenType() == TokenType::number) {
-								args.push_back(std::stod(values_stack.top().getTokenValue()));
-							}
-							else {
-								Variables vars;
-								args.push_back(vars.callVariable(values_stack.top().getTokenValue()));
-							}
-							values_stack.pop();
-						}
-						double result = func_solver.count_func(operators_stack.top().getTokenValue(), args);
-						operators_stack.pop();
-						Lexeme new_value(std::to_string(result), TokenType::number, 0, 0);
-					}
+					ExpressionSolver::solve_operator();
 				}
 			}
 		}
 		else if (it->getTokenType() == TokenType::function_delimiter) {
 			it++;
-		}			
+		}
+		else if (it->getTokenType() == TokenType::assignment) {
+			it++;
+			Variables vars;
+			double value = std::stod(values_stack.top().getTokenValue());
+			values_stack.pop();
+			vars.addOrChangeVar(values_stack.top().getTokenValue(), value);
+		}
+	}
+	return std::stod(values_stack.top().getTokenValue());
+}
+
+void ExpressionSolver::solve_operator() {
+	if (operators_stack.top().getTokenType() == TokenType::operation) {
+		if (operators_stack.top().getTokenValue() == "-u") {
+			values_stack.top().setTokenValue(std::to_string(-std::stod(values_stack.top().getTokenValue())));
+			operators_stack.pop();
+		}
+		else {
+			std::vector<double> args;
+			for (int i = 0; i < 2; i++) {
+				if (values_stack.top().getTokenType() == TokenType::number) {
+					args.push_back(std::stod(values_stack.top().getTokenValue()));
+				}
+				else {
+					Variables vars;
+					args.push_back(vars.callVariable(values_stack.top().getTokenValue()));
+				}
+				values_stack.pop();
+			}
+			double result = 0;
+			if (operators_stack.top().getTokenValue() == "-") {
+				result = args[1] - args[0];
+			}
+			else if (operators_stack.top().getTokenValue() == "+") {
+				result = args[1] + args[0];
+			}
+			else if (operators_stack.top().getTokenValue() == "/") {
+				result = args[1] / args[0];
+			}
+			else if (operators_stack.top().getTokenValue() == "*") {
+				result = args[1] * args[0];
+			}
+			else if (operators_stack.top().getTokenValue() == "^") {
+				result = pow(args[1], args[0]);
+			}
+			operators_stack.pop();
+			Lexeme new_value(std::to_string(result), TokenType::number, 0, 0);
+		}
+	}
+	else if (operators_stack.top().getTokenType() == TokenType::function) {
+		Functions func_solver;
+		std::vector<double> args;
+		if (func_solver.func_type(operators_stack.top().getTokenValue()) == "Binary") {
+			for (int i = 0; i < 2; i++) {
+				if (values_stack.top().getTokenType() == TokenType::number) {
+					args.push_back(std::stod(values_stack.top().getTokenValue()));
+				}
+				else {
+					Variables vars;
+					args.push_back(vars.callVariable(values_stack.top().getTokenValue()));
+				}
+				values_stack.pop();
+			}
+		}
+		else {
+			if (values_stack.top().getTokenType() == TokenType::number) {
+				args.push_back(std::stod(values_stack.top().getTokenValue()));
+			}
+			else {
+				Variables vars;
+				args.push_back(vars.callVariable(values_stack.top().getTokenValue()));
+			}
+			values_stack.pop();
+		}
+		double result = func_solver.count_func(operators_stack.top().getTokenValue(), args);
+		operators_stack.pop();
+		Lexeme new_value(std::to_string(result), TokenType::number, 0, 0);
 	}
 }
