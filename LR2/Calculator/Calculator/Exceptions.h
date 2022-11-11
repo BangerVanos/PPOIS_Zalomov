@@ -1,9 +1,9 @@
 #pragma once
 
 
-#include <iostream>
-#include <string>
 #include <exception>
+#include <string>
+#include <iostream>
 
 
 
@@ -81,3 +81,6 @@ class NoArgumentError final : public BaseException {
 public:
 	NoArgumentError();
 };
+
+
+extern void pointer_print(int space_amount);

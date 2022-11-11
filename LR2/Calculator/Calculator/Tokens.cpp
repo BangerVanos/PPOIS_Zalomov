@@ -1,4 +1,5 @@
 #include "Tokens.h"
+#include "Exceptions.h"
 
 
 Lexeme::Lexeme(std::string token_value, TokenType token_type, unsigned int index, int priority) {
@@ -50,8 +51,10 @@ void TokenBuffer::tokenDivider() {
 	for (auto sym : this->buffer) {
 		index++;
 		if (std::find(SEPS.begin(), SEPS.end(), sym) != SEPS.end()) {
-			Lexeme to_push(token_value, TokenType::other, index-1, 0);
-			readyTokens.push_back(to_push);
+			Lexeme to_push(token_value, TokenType::other, index - 1, 0);
+			if (token_value != "") {				
+				readyTokens.push_back(to_push);
+			}			
 			token_value.assign(1, sym);
 			to_push.setTokenValue(token_value);
 			to_push.setIndex(index);
@@ -62,6 +65,10 @@ void TokenBuffer::tokenDivider() {
 			token_value += sym;
 		}		
 	}
+	Lexeme to_push(token_value, TokenType::other, index, 0);
+	if (to_push.getTokenValue() != "") {
+		readyTokens.push_back(to_push);
+	}	
 }
 
 std::vector <Lexeme> TokenBuffer::GetReadyTokens() {
@@ -79,6 +86,8 @@ void TokenAnalyzer::analyzeTokens() {
 		try {
 			auto test_for_number = std::stod(it->getTokenValue());
 			it->setTokenType(TokenType::number);
+			it++;
+			continue;
 		}
 		catch (...) {
 
@@ -101,17 +110,19 @@ void TokenAnalyzer::analyzeTokens() {
 			}
 		}
 		else if (std::regex_match(it->getTokenValue(), name_regex)) {
-			if ((++it)->getTokenValue() == "(") {
-				--it;
-				it->setTokenType(TokenType::function);
+			auto check_func_iter = it;
+			check_func_iter++;
+			if (check_func_iter != raw_tokens.end() && check_func_iter->getTokenValue() == "(") {				
+				it->setTokenType(TokenType::function);				
 			}
 			else {
-				--it;
 				it->setTokenType(TokenType::variable);
 			}
+			
 		}
 		else {
 			it->setTokenType(TokenType::other);
+			pointer_print(it->getIndex());
 			throw TokenUnresolvedException();
 		}
 		++it;

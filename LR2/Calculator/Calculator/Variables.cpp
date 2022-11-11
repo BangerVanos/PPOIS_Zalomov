@@ -1,6 +1,8 @@
 #include "Variables.h"
 #include "Exceptions.h"
 
+const std::map<std::string, double> Variables::CONST_VARS{ {"PI", 3.141592}, {"pi", 3.141592}, {"E", 2.718281}, {"e", 2.718281} };
+
 void Variables::addOrChangeVar(std::string var_name, double var_value)
 {
 	if (CONST_VARS.find(var_name) != CONST_VARS.end()) {

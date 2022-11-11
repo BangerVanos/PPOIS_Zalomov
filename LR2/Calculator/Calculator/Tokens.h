@@ -1,13 +1,12 @@
 #pragma once
 
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <utility>
-#include <string>
-#include <regex>
+
 #include "Functions.h"
 #include "Exceptions.h"
+#include <regex>
+#include <vector>
+#include <string>
+#include <algorithm>
 
 enum TokenType {
 	number,

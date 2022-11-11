@@ -1,23 +1,18 @@
 #pragma once
 
 
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <iostream>
-#include <map>
-#include <stack>
 #include "Functions.h"
 #include "Tokens.h"
 #include "Variables.h"
 #include "Exceptions.h"
+#include <stack>
+
 
 
 class ExpressionAnalyzer {
 public:
 	ExpressionAnalyzer(std::vector <Lexeme>& raw_tokens);
-	void analyze_prioritize();
-	void finalize_tokens();
+	void analyze_prioritize();	
 	std::vector <Lexeme> getTokens();	
 private:
 	std::vector <Lexeme> raw_tokens;	
@@ -30,6 +25,7 @@ private:
 	std::stack<Lexeme> values_stack;
 	std::vector<Lexeme> tokens;
 	void solve_operator();
+	double get_top_value();
 public:
 	ExpressionSolver(std::vector<Lexeme> tokens);
 	double solve();

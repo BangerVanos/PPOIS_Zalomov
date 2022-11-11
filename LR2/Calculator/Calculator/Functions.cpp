@@ -3,7 +3,7 @@
 
 
 double Functions::count_func(std::string func_name, std::vector <double> func_args) {
-	if ((std::find(BINARY_FUNCS.begin(), BINARY_FUNCS.end(), func_name) == BINARY_FUNCS.end()) || (std::find(UNARY_FUNCS.begin(), UNARY_FUNCS.end(), func_name) == UNARY_FUNCS.end())) {
+	if ((std::find(BINARY_FUNCS.begin(), BINARY_FUNCS.end(), func_name) == BINARY_FUNCS.end()) && (std::find(UNARY_FUNCS.begin(), UNARY_FUNCS.end(), func_name) == UNARY_FUNCS.end())) {
 		throw FunctionDoesntExist(func_name);
 	}
 	if (std::find(BINARY_FUNCS.begin(), BINARY_FUNCS.end(), func_name) != BINARY_FUNCS.end()) {
@@ -11,7 +11,7 @@ double Functions::count_func(std::string func_name, std::vector <double> func_ar
 			throw FunctionWrongArgumentAmount(func_name, func_args.size(), 2);
 		}		
 		if (func_name == "pow") {
-			return pow(func_args[0], func_args[1]);
+			return pow(func_args[1], func_args[0]);
 		}
 		else if (func_name == "min") {
 			return func_args[0] < func_args[1] ? func_args[0] : func_args[1];

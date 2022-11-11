@@ -66,7 +66,15 @@ NoCloseParenthesis::NoCloseParenthesis() {
 }
 
 NoArgumentError::NoArgumentError() {
-	exception_text = "Error. Waited for argument, but hasn't found one."
+	exception_text = "Error. Waited for argument, but hasn't found one.";
+}
+
+
+extern void pointer_print(int space_amount) {
+	std::string spaces;
+	spaces.assign(space_amount, ' ');
+	spaces += '^';
+	std::cout << spaces << std::endl;
 }
 
 
