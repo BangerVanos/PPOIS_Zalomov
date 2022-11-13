@@ -34,7 +34,7 @@ FunctionDoesntExist::FunctionDoesntExist(std::string func_name) {
 }
 
 FunctionWrongArgumentAmount::FunctionWrongArgumentAmount(std::string func_name, int user_argument_amount, int argument_amount) {
-	exception_text = "Error. Function " + func_name + " takes " + std::to_string(argument_amount) + ", but you've passed " + std::to_string(user_argument_amount);
+	exception_text = "Error. Function " + func_name + " takes " + std::to_string(argument_amount) + " arguments, but you've passed " + std::to_string(user_argument_amount);
 }
 
 FunctionNoCloseParenthesis::FunctionNoCloseParenthesis() {

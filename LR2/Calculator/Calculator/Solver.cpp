@@ -12,7 +12,7 @@ void ExpressionAnalyzer::analyze_prioritize() {
 			throw AssignmentError();
 		}
 	}
-	catch (std::out_of_range) {
+	catch (...) {
 
 	}
 	int additional_priority = 0;
@@ -50,7 +50,9 @@ void ExpressionAnalyzer::analyze_prioritize() {
 				pointer_print((--it)->getIndex()+2);
 				throw BinaryOperatorError();
 			}
-			--it;
+			else {
+				--it;
+			}			
 			if (it->getTokenValue() == "-") {				
 				if (it == raw_tokens.begin()) {				
 					if ((++it)->getTokenType() == TokenType::operation) {
