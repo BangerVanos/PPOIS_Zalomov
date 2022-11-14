@@ -1,8 +1,8 @@
 # PPOIS (ППОИС) LABS
 
-AUTHOR: Zalomau Raman (Заломов Роман)\n
-UNIVERSITY: BSUIR (БГУИР)\n
-YEAR: 2022\n
+AUTHOR: Zalomau Raman (Заломов Роман)  
+UNIVERSITY: BSUIR (БГУИР)  
+YEAR: 2022  
 
 ### WHAT HAS BEEN DONE
 
