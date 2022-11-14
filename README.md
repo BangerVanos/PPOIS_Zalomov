@@ -1,10 +1,10 @@
 # PPOIS (ППОИС) LABS
 
-AUTHOR: Zalomau Raman (Заломов Роман)
-UNIVERSITY: BSUIR (БГУИР)
-YEAR: 2022
+AUTHOR: Zalomau Raman (Заломов Роман)\n
+UNIVERSITY: BSUIR (БГУИР)\n
+YEAR: 2022\n
 
-# WHAT HAS BEEN DONE
+### WHAT HAS BEEN DONE
 
 **LAB_1: Variant 1.7**
 
@@ -23,4 +23,4 @@ Non-oriented graph implementation using List of Edges
 
 
 
-### Feel free to use
+### ***Feel free to use***
