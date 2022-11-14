@@ -1,8 +1,8 @@
 ﻿  main.cpp
-D:\Programms\Programming\BSUIR\PPOIS_Zalomov\LR3\PPOIS_LR3_GraphClass\PPOIS_LR3_GraphClass\Graph.h(383,1): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
-D:\Programms\Programming\BSUIR\PPOIS_Zalomov\LR3\PPOIS_LR3_GraphClass\PPOIS_LR3_GraphClass\Graph.h(381): message : во время компиляции функции-члена класс шаблон "int Graph<std::string>::vertex_amount(void)"
-D:\Programms\Programming\BSUIR\PPOIS_Zalomov\LR3\PPOIS_LR3_GraphClass\PPOIS_LR3_GraphClass\Menu.h(67): message : выполняется компиляция ссылки на экземпляр шаблон функции "int Graph<std::string>::vertex_amount(void)"
-D:\Programms\Programming\BSUIR\PPOIS_Zalomov\LR3\PPOIS_LR3_GraphClass\PPOIS_LR3_GraphClass\main.cpp(6): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "Graph<std::string>"
-D:\Programms\Programming\BSUIR\PPOIS_Zalomov\LR3\PPOIS_LR3_GraphClass\PPOIS_LR3_GraphClass\Graph.h(691): warning C4715: Graph<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::vertex_begin: значение возвращается не при всех путях выполнения
-D:\Programms\Programming\BSUIR\PPOIS_Zalomov\LR3\PPOIS_LR3_GraphClass\PPOIS_LR3_GraphClass\Graph.h(182): warning C4172: возвращение адреса локальной или временной переменной : tmp
-  PPOIS_LR3_GraphClass.vcxproj -> D:\Programms\Programming\BSUIR\PPOIS_Zalomov\LR3\PPOIS_LR3_GraphClass\x64\Debug\PPOIS_LR3_GraphClass.exe
+D:\Programs\Programming\BSUIR\PPOIS\PPOIS_Zalomov\LR3\PPOIS_LR3_GraphClass\PPOIS_LR3_GraphClass\Graph.h(382,1): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Programs\Programming\BSUIR\PPOIS\PPOIS_Zalomov\LR3\PPOIS_LR3_GraphClass\PPOIS_LR3_GraphClass\Graph.h(380): message : во время компиляции функции-члена класс шаблон "int Graph<std::string>::vertex_amount(void)"
+D:\Programs\Programming\BSUIR\PPOIS\PPOIS_Zalomov\LR3\PPOIS_LR3_GraphClass\PPOIS_LR3_GraphClass\Menu.h(67): message : выполняется компиляция ссылки на экземпляр шаблон функции "int Graph<std::string>::vertex_amount(void)"
+D:\Programs\Programming\BSUIR\PPOIS\PPOIS_Zalomov\LR3\PPOIS_LR3_GraphClass\PPOIS_LR3_GraphClass\main.cpp(6): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "Graph<std::string>"
+D:\Programs\Programming\BSUIR\PPOIS\PPOIS_Zalomov\LR3\PPOIS_LR3_GraphClass\PPOIS_LR3_GraphClass\Graph.h(690): warning C4715: Graph<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::vertex_begin: значение возвращается не при всех путях выполнения
+D:\Programs\Programming\BSUIR\PPOIS\PPOIS_Zalomov\LR3\PPOIS_LR3_GraphClass\PPOIS_LR3_GraphClass\Graph.h(182): warning C4172: возвращение адреса локальной или временной переменной : tmp
+  PPOIS_LR3_GraphClass.vcxproj -> D:\Programs\Programming\BSUIR\PPOIS\PPOIS_Zalomov\LR3\PPOIS_LR3_GraphClass\x64\Debug\PPOIS_LR3_GraphClass.exe

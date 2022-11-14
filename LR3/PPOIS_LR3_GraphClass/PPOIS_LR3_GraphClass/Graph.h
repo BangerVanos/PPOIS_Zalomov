@@ -288,7 +288,7 @@ private:
 		vertex_list.clear();
 		for (Edge edge : edge_container) {			
 			if (std::find(vertex_list.begin(), vertex_list.end(), edge.out_vertex) == vertex_list.end()) vertex_list.push_back(edge.out_vertex);
-			if (std::find(vertex_list.begin(), vertex_list.end(), edge.to_vertex) == vertex_list.end()) vertex_list.push_back(edge.out_vertex);
+			if (std::find(vertex_list.begin(), vertex_list.end(), edge.to_vertex) == vertex_list.end()) vertex_list.push_back(edge.to_vertex);
 		}		
 	}
 public:	
@@ -332,8 +332,7 @@ public:
 		edge_container.push_back(new_edge);
 		update_info_about_vertexes();
 	}
-	void add_edge(T out_vertex, T to_vertex) {
-		
+	void add_edge(T out_vertex, T to_vertex) {		
 		if (is_represented_edge(out_vertex, to_vertex)) {
 			std::cout << "Such edge is already represented in graph!" << std::endl;
 			return;
@@ -398,7 +397,7 @@ public:
 		for (Edge edge : this->edge_container) {
 			bool edge_represented_in_cmp_graph = false;
 			for (Edge cmp_edge : cmp_graph.edge_container) {
-				if (edge = cmp_edge) {
+				if (edge == cmp_edge) {
 					edge_represented_in_cmp_graph = true;
 					break;
 				}
