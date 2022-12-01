@@ -5,27 +5,14 @@ ExpressionAnalyzer::ExpressionAnalyzer(std::vector<Lexeme>& raw_tokens) {
 	this->raw_tokens = raw_tokens;
 }
 
-void ExpressionAnalyzer::analyze_prioritize() {
-	try {
-		if ((raw_tokens[1].getTokenType() == TokenType::assignment) && (raw_tokens[0].getTokenType() != TokenType::variable)) {
-			pointer_print(raw_tokens[1].getIndex());
-			throw AssignmentError();
-		}
-	}
-	catch (...) {
-
-	}
+void ExpressionAnalyzer::analyze_prioritize() {	
 	int additional_priority = 0;
 	int unclosed_parenthesis = 0;
 	std::vector <Lexeme>::iterator it = raw_tokens.begin();
 	bool unary_minus_possible = true;
 	bool operation_possible = true;
 	while (it != raw_tokens.end()) {		
-		if (it->getTokenType() == assignment) {
-			if (it != ++raw_tokens.begin()) {
-				pointer_print(it->getIndex());
-				throw AssignmentError();
-			}
+		if (it->getTokenType() == assignment) {			
 			unary_minus_possible = true;
 			it->setPriority(OPERATOR_PRIORITY.at("=") + additional_priority);
 		}		
@@ -191,11 +178,13 @@ double ExpressionSolver::solve() {
 	while (!operators_stack.empty()) {
 		if (operators_stack.top().getTokenType() == TokenType::assignment) {
 			Variables variables_finder;
-			double value = std::stod(values_stack.top().getTokenValue());
-			values_stack.pop();
+			double value = get_top_value();			
 			variables_finder.addOrChangeVar(values_stack.top().getTokenValue(), value);
+			operators_stack.pop();
 		}
-		ExpressionSolver::solve_operator();
+		else {
+			ExpressionSolver::solve_operator();
+		}		
 	}
 	return get_top_value();
 }
