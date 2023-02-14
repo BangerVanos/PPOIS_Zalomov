@@ -1,3 +1,6 @@
+import exceptions.exceptions as exc
+
+
 class CardAccount:
     def __int__(self, balance: float, acc_id: int) -> None:
         self.__balance: float = balance
@@ -11,6 +14,8 @@ class CardAccount:
         self.__balance += value
 
     def bal_sub(self, value: float):
+        if self.__balance < value:
+            raise exc.NotEnoughMoney
         self.__balance -= value
 
     @property

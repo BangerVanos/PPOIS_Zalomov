@@ -1,4 +1,5 @@
 from banknote.banknote import Banknote
+import exceptions.exceptions as exc
 
 
 class MoneyVault:
@@ -18,8 +19,10 @@ class MoneyVault:
             possible_opt[banknote] = best_amount_available
             available_best_sum += banknote.value * best_amount_available
             rest_sum -= banknote.value * best_amount_available
-        if available_best_sum != money_value:
-            raise ValueError
+        if available_best_sum < money_value:
+            raise exc.NotEnoughMoney
+        elif available_best_sum > money_value:
+            raise exc.NoAvailableMoneyConfig
         else:
             for banknote in self.__money_vault.keys():
                 self.__money_vault[banknote] -= possible_opt[banknote]
