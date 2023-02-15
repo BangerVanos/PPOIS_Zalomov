@@ -8,3 +8,11 @@ class NoAvailableMoneyConfig(Exception):
 
 class CardIsBlocked(Exception):
     pass
+
+
+class NoCardInserted(Exception):
+    pass
+
+
+class CardExpired(Exception):
+    pass

@@ -2,9 +2,9 @@ import exceptions.exceptions as exc
 
 
 class CardAccount:
-    def __int__(self, balance: float, acc_id: int) -> None:
+    def __init__(self, acc_id: str, balance: float) -> None:
+        self.__acc_id: str = acc_id
         self.__balance: float = balance
-        self.__acc_id: int = acc_id
 
     @property
     def balance(self) -> float:
@@ -19,11 +19,8 @@ class CardAccount:
         self.__balance -= value
 
     @property
-    def acc_id(self) -> int:
+    def acc_id(self) -> str:
         return self.__acc_id
-
-    def __delete__(self, instance):
-        del self
 
     def __str__(self):
         return f"Account ID: {self.__acc_id}\n" \
