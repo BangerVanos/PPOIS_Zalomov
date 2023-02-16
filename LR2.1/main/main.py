@@ -1,4 +1,5 @@
 from cli.cli import CliAtm
 
 
-CliAtm.start()
+if __name__ == "__main__":
+    CliAtm.start()
