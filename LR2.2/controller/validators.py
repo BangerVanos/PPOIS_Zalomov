@@ -24,6 +24,8 @@ class Validator:
 
     @staticmethod
     def validate_hours_amount(hours: int) -> bool:
+        if hours < 0:
+            return False
         if hours > 32000:
             return False
         return True

@@ -1,10 +1,25 @@
-BoxLayout:
+StudentsAppMainWidget:
     orientation: "vertical"
     spacing: 15
     padding: 100
-    Button:
+    MDLabel:
+        text: "Выберите дейтсвие из списка ниже"
+        halign: "center"
+    MDRectangleFlatButton:
         text: "Список всех студентов"
-    Button:
+        pos_hint: {'center_x': .5, 'center_y': 1.}
+        size_hint: .7,.2
+    MDRectangleFlatButton:
+        text: "Добавить студента в список"
+        pos_hint: {'center_x': .5, 'center_y': 1.}
+        size_hint: .7,.2
+        on_release: root.show_add_dialog()
+    MDRectangleFlatButton:
         text: "Поиск студентов по параметрам"
-    Button:
+        pos_hint: {'center_x': .5, 'center_y': 1.}
+        size_hint: .7,.2
+        on_release: root.show_find_dialog()
+    MDRectangleFlatButton:
         text: "Удаление студентов по параметрам"
+        pos_hint: {'center_x': .5, 'center_y': 1.}
+        size_hint: .7,.2
