@@ -1,7 +1,12 @@
+from typing import Optional
+
+
 class Validator:
 
     @staticmethod
-    def validate_name(name: str) -> bool:
+    def validate_name(name: Optional[str]) -> bool:
+        if name is None:
+            return True
         if not 0 < len(name) <= 100:
             return False
         if not name[0].isalpha():
@@ -14,7 +19,9 @@ class Validator:
         return True
 
     @staticmethod
-    def validate_group_number(group_number: str) -> bool:
+    def validate_group_number(group_number: Optional[str]) -> bool:
+        if group_number is None:
+            return True
         if not 0 < len(group_number) <= 10:
             return False
         for i in group_number:
@@ -24,6 +31,8 @@ class Validator:
 
     @staticmethod
     def validate_hours_amount(hours: int) -> bool:
+        if hours is None:
+            return True
         if hours < 0:
             return False
         if hours > 32000:

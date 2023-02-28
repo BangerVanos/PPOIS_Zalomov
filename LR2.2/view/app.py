@@ -4,6 +4,7 @@ from kivy.lang.builder import Builder
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.button import MDRectangleFlatButton
+from controller.controller import Controller
 
 
 class AddDialogWidget(MDGridLayout):
@@ -14,6 +15,7 @@ class StudentsAppMainWidget(MDBoxLayout):
     def __init__(self, **kwargs):
         super(StudentsAppMainWidget, self).__init__(**kwargs)
         self.dialog = None
+        self.controller = Controller()
 
     def show_add_dialog(self):
         dialog_widget = Builder.load_file("view/add_dialog.kv")
@@ -28,19 +30,27 @@ class StudentsAppMainWidget(MDBoxLayout):
         self.dialog.open()
 
     def send_add_data(self, obj):
-        print('-'*10)
-        print(f"Фамилия: {self.dialog.content_cls.ids.last_name.text}")
-        print(f"Имя: {self.dialog.content_cls.ids.first_name.text}")
-        print(f"Отчество: {self.dialog.content_cls.ids.middle_name.text}")
-        print(f"Номер группы: {self.dialog.content_cls.ids.group_number.text}")
-        illness_hours = int(self.dialog.content_cls.ids.illness_hours.text)
-        other_hours = int(self.dialog.content_cls.ids.other_hours.text)
-        bad_hours = int(self.dialog.content_cls.ids.bad_hours.text)
-        all_hours = illness_hours + other_hours + bad_hours
-        print(f"Пропуски по болезни: {illness_hours}")
-        print(f"Пропуски по другим причинам: {other_hours}")
-        print(f"Пропуски н/у: {bad_hours}")
-        print(f"Всех пропусков: {all_hours}")
+        student_info = dict()
+        student_info['last_name'] = self.dialog.content_cls.ids.last_name.text
+        if student_info['last_name'] is None:
+            self.validation_dialog("Фамилия - обязательный параметр")
+            return
+        student_info['first_name'] = self.dialog.content_cls.ids.first_name.text
+        if student_info['first_name'] is None:
+            self.validation_dialog("Фамилия - обязательный параметр")
+            return
+        student_info['middle_name'] = self.dialog.content_cls.ids.middle_name.text
+        student_info['group_number'] = self.dialog.content_cls.ids.group_number.text
+        student_info['illness_hours'] = self.dialog.content_cls.ids.illness_hours.text
+        student_info['illness_hours'] \
+            = 0 if student_info['illness_hours'] is None else abs(int(student_info['illness_hours']))
+        student_info['other_hours'] = self.dialog.content_cls.ids.other_hours.text
+        student_info['other_hours'] \
+            = 0 if student_info['other_hours'] is None else abs(int(student_info['other_hours']))
+        student_info['bad_hours'] = self.dialog.content_cls.ids.bad_hours.text
+        student_info['bad_hours'] \
+            = 0 if student_info['bad_hours'] is None else abs(int(student_info['bad_hours']))
+        self.controller.add(student_info)
 
     def show_find_dialog(self):
         close_button = MDRectangleFlatButton(text="Отмена", on_release=self.close_dialog)
@@ -55,6 +65,15 @@ class StudentsAppMainWidget(MDBoxLayout):
         )
         self.dialog.add_widget(grid_layout)
         self.dialog.open()
+
+    def validation_dialog(self, text: str):
+        self.dialog = MDDialog(
+            title=text,
+            buttons=MDRectangleFlatButton(
+                text="Понятно",
+                on_release=self.close_dialog
+            )
+        )
 
     def close_dialog(self, obj):
         self.dialog.dismiss()

@@ -1,6 +1,7 @@
 import sqlalchemy as sql
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
+import os
 
 
 # metadata = sql.MetaData()
@@ -20,10 +21,11 @@ from sqlalchemy.orm import sessionmaker
 # engine = sql.engine.create_engine('sqlite:///students.db', echo=True)
 # metadata.create_all(engine)
 
+db_path = 'sqlite:///' + os.path.join(os.getcwd(), 'students.db')
 
 class DbConnect:
     def __init__(self) -> None:
-        self.engine = sql.create_engine('sqlite:///students.db', echo=True)
+        self.engine = sql.create_engine(db_path, echo=True)
         try:
             self.engine.connect()
         except SQLAlchemyError:
@@ -31,6 +33,5 @@ class DbConnect:
                   'and try again')
             raise SQLAlchemyError
 
-    @property
     def session(self):
         return sessionmaker(bind=self.engine)

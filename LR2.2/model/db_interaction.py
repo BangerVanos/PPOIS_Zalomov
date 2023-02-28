@@ -1,16 +1,16 @@
 import sqlalchemy as sql
 from db.db import DbConnect
-from declarative_model import Student
+from .declarative_model import Student
 
 
 class StudentInteractor:
 
     def __init__(self, db_connect: DbConnect) -> None:
         self.db_connect = db_connect
-        self.session = db_connect.session
+        self.session = db_connect.session()
 
     def all(self):
-        s = self.session
+        s = self.session()
         students = s.query(
             Student.student_id,
             Student.first_name,
@@ -26,7 +26,7 @@ class StudentInteractor:
         return students
 
     def get(self, filter_options: dict):
-        s = self.session
+        s = self.session()
         students = s.query(
             Student.student_id,
             Student.first_name,
@@ -65,13 +65,13 @@ class StudentInteractor:
         return students
 
     def add(self, student: Student):
-        s = self.session
+        s = self.session()
         s.add(student)
         s.commit()
         s.close()
 
     def delete(self, delete_options: dict):
-        s = self.session
+        s = self.session()
         students = self.get(delete_options)
         deleted_notes_count = len(students)
         for student in students:
