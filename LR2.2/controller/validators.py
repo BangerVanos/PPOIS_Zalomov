@@ -5,7 +5,7 @@ class Validator:
 
     @staticmethod
     def validate_name(name: Optional[str]) -> bool:
-        if name is None:
+        if name in ('', None):
             return True
         if not 0 < len(name) <= 100:
             return False
@@ -20,7 +20,7 @@ class Validator:
 
     @staticmethod
     def validate_group_number(group_number: Optional[str]) -> bool:
-        if group_number is None:
+        if group_number in ('', None):
             return True
         if not 0 < len(group_number) <= 10:
             return False

@@ -21,11 +21,10 @@ import os
 # engine = sql.engine.create_engine('sqlite:///students.db', echo=True)
 # metadata.create_all(engine)
 
-db_path = 'sqlite:///' + os.path.join(os.getcwd(), 'students.db')
 
 class DbConnect:
     def __init__(self) -> None:
-        self.engine = sql.create_engine(db_path, echo=True)
+        self.engine = sql.create_engine('sqlite:///db/students.db', echo=True)
         try:
             self.engine.connect()
         except SQLAlchemyError:

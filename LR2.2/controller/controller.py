@@ -11,22 +11,34 @@ class Controller:
 
     def add(self, student_info: dict):
         if not Validator.validate_name(student_info['first_name']):
-            self.validation_dialog("Имя должно содержать только буквы и быть длиной не более 100 символов")
+            self.validation_dialog("Имя должно содержать только буквы и быть длиной не более 100 символов.\n"
+                                   "Первая буква должна быть заглавной.")
+            return
         if not Validator.validate_name(student_info['last_name']):
-            self.validation_dialog("Фамилия должна содержать только буквы и быть длиной не более 100 символов")
+            self.validation_dialog("Фамилия должна содержать только буквы и быть длиной не более 100 символов\n"
+                                   "Первая буква должна быть заглавной.")
+            return
         if not Validator.validate_name(student_info['middle_name']):
-            self.validation_dialog("Отчество должно содержать только буквы и быть длиной не более 100 символов")
+            self.validation_dialog("Отчество должно содержать только буквы и быть длиной не более 100 символов\n"
+                                   "Первая буква должна быть заглавной.")
+            return
         if not Validator.validate_group_number(student_info['group_number']):
             self.validation_dialog("Номер группы не должен содержать более 10 символов")
+            return
         if not Validator.validate_hours_amount(student_info['illness_hours']):
             self.validation_dialog("Часы пропуска больше или равны 0, но меньше 32000")
+            return
         if not Validator.validate_hours_amount(student_info['other_hours']):
             self.validation_dialog("Часы пропуска больше или равны 0, но меньше 32000")
+            return
         if not Validator.validate_hours_amount(student_info['bad_hours']):
             self.validation_dialog("Часы пропуска больше или равны 0, но меньше 32000")
-        student_info['all_hours'] = student_info['illness_hours'] + student_info['other_hours'] + student_info['bad_hours']
+            return
+        student_info['all_hours']\
+            = student_info['illness_hours'] + student_info['other_hours'] + student_info['bad_hours']
         if not Validator.validate_hours_amount(student_info['all_hours']):
             self.validation_dialog("Сумма часов пропусков больше или равна 0, но меньше 32000")
+            return
         self.model.add(student_info)
         self.validation_dialog("Добавлено!")
 
@@ -38,6 +50,6 @@ class Controller:
         self.dialog.open()
 
     def close_validation_dialog(self, obj):
-        self.dialog.close()
+        self.dialog.dismiss()
 
 
