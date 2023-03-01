@@ -1,6 +1,14 @@
 StudentsScreenManager:
     StudentsAppMainScreen:
+        name: 'main'
     AddStudentScreen:
+        name: 'add_student'
+    AllStudentScreen:
+        name: 'all_student'
+    FindStudentScreen:
+        name: 'find_student'
+    DeleteStudentScreen:
+        name: 'delete_student'
 <AddStudentScreen>:
     MDBoxLayout:
         orientation: 'vertical'
@@ -8,11 +16,11 @@ StudentsScreenManager:
         spacing: 10
         MDLabel:
             adaptive_size: True
-            size_hint: 1.,.05
+            size_hint: 1.,.1
             text: "Добавить нового студента"
             font_size: 48
         MDGridLayout:
-            size_hint: 1.,.9
+            size_hint: 1.,.8
             rows: 7
             cols: 2
             padding: 50
@@ -85,18 +93,24 @@ StudentsScreenManager:
                 input_filter: "int"
                 multiline: False
         MDBoxLayout:
-            size_hint: 1.,.05
+            size_hint: 1.,.1
             orientation: 'horizontal'
             spacing: 50
             MDRectangleFlatButton:
                 adaptive_size: True
                 size_hint: .3,.3
-                pos_hint: {'pos_hint_x': .5, 'pos_hint_y': .5}
+                pos_hint: {'center_x': .5, 'center_y': .5}
                 text: "Добавить"
                 on_release: root.send_add_data()
             MDRectangleFlatButton:
                 adaptive_size: True
                 size_hint: .3,.3
-                pos_hint: {'pos_hint_x': .5, 'pos_hint_y': .5}
+                pos_hint: {'center_x': .5, 'center_y': .5}
                 text: "Отмена"
                 on_release: root.manager.current = 'main'
+            MDRectangleFlatButton:
+                adaptive_size: True
+                size_hint: .3,.3
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                text: "Очистить"
+                on_release: root.flush_text_input()
