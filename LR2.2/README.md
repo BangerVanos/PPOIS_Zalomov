@@ -11,12 +11,12 @@ YEAR: 2023
 
 > Used libs
 >
->> sqlalchemy
->> KivyMD
->> Kivy
+>> <p>sqlalchemy</p>
+>> <p>KivyMD</p>
+>> <p>Kivy</p>
 
 > Run:
 >
->> cd LR2.2
->> python main.py
->> (don't forget to install python interpreter)
+>> <p>cd LR2.2</p>
+>> <p>python main.py</p>
+>> <p>(don't forget to install python interpreter)</p>
