@@ -17,6 +17,5 @@ YEAR: 2023
 
 > Run:
 >
->> <p>cd LR2.2</p>
 >> <p>python main.py</p>
 >> <p>(don't forget to install python interpreter)</p>
