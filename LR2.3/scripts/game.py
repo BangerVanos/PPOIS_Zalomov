@@ -1,29 +1,27 @@
 import pygame
-import file_path
+from scripts import configs as cf
+from scripts.game_loops.limit_time_mode_loop import limit_time_mode as ltm
+from scripts.game_loops.main_menu_loop import main_menu
+from scripts.game_states import GameStates as gs
 
-
-SCREEN_WIDTH = 1600
-SCREEN_HEIGHT = 900
-
-FPS = 60
 
 clock = pygame.time.Clock()
 
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('Advanced Moorhuhn')
-icon_image = pygame.image.load(file_path.ICON_DIR)
+screen = pygame.display.set_mode((cf.SCREEN_WIDTH, cf.SCREEN_HEIGHT))
+icon_image = pygame.image.load(cf.ICON_DIR)
 pygame.display.set_icon(icon_image)
+pygame.init()
 
 
-def main():
-    running = True
+class Game:
+    def __init__(self):
+        self.__main_menu_loop = main_menu
+        self.__limit_time_mode_loop = ltm
+        self.__game_state = gs.MAIN_MENU
 
-    while running:
-        clock.tick(FPS)
-
-        # event handler
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-
-    pygame.quit()
+    def game(self):
+        while True:
+            if self.__game_state == gs.MAIN_MENU:
+                self.__game_state = self.__main_menu_loop()
+            elif self.__game_state == gs.LIMIT_TIME_MODE:
+                self.__game_state = self.__limit_time_mode_loop()
