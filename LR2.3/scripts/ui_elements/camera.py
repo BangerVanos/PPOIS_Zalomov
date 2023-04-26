@@ -117,6 +117,6 @@ class CameraGroup(pygame.sprite.Group):
         self.display_surface.blit(self.bg_surf, bg_offset)
 
         # active sprites
-        for sprite in sorted(self.sprites(), key=lambda y: sprite.rect.centery):
+        for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery):
             offset_pos = sprite.rect.topleft - self.offset
             self.display_surface.blit(sprite.image, offset_pos)
