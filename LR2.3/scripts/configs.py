@@ -60,3 +60,5 @@ EFFECTS_IMG = {'explosion': [os.path.realpath(os.path.join(ROOT_DIR, f'assets/re
 play_score = 0
 
 SCORE_LEADERBOARD_PATH = os.path.realpath(os.path.join(ROOT_DIR, 'score_leaders.json'))
+
+AFTER_GAME_BG = os.path.realpath(os.path.join(ROOT_DIR, 'assets/ready_assets/miscellaneous/after_game_bg.png'))
