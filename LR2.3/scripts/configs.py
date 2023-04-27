@@ -26,10 +26,14 @@ BACKGROUND_DIR = {'bg_day': os.path.realpath(os.path.join(ROOT_DIR, 'assets/read
 UI_SPRITES_IMG = {'cursor': os.path.realpath(os.path.join(ROOT_DIR, 'assets/ready_assets/miscellaneous'
                                                                     '/cursor_cross.png')),
                   'sight': os.path.realpath(os.path.join(ROOT_DIR, 'assets/ready_assets/miscellaneous'
-                                                                   '/tank_sight.png'))}
+                                                                   '/tank_sight.png')),
+                  'ammo_icon': os.path.realpath(os.path.join(ROOT_DIR, 'assets/ready_assets/miscellaneous'
+                                                                       '/ammo_icon.png'))}
 SIGHT_SPEED = SCREEN_HEIGHT // 100
+CLIP_SIZE = 10
 IN_GAME_FONT = os.path.realpath(os.path.join(ROOT_DIR, 'assets/fonts/joystix_monospace.otf'))
 
+ALL_ENEMIES = ['enemy_tank_1', 'enemy_tank_2', 'enemy_tank_3']
 ENEMY_SPRITES_IMG = {'enemy_tank_1': [os.path.realpath(os.path.join(ROOT_DIR, f'assets/ready_assets/enemies/'
                                                                               f'enemy_tank_1/enemy_tank_1_{i}.png'))
                                       for i in range(1, 11)],
@@ -41,3 +45,18 @@ ENEMY_SPRITES_IMG = {'enemy_tank_1': [os.path.realpath(os.path.join(ROOT_DIR, f'
                                       for i in range(1, 17)]
 
                      }
+ENEMY_BASIC_REL_SIZE = {'enemy_tank_1': (30, 10),
+                        'enemy_tank_2': (18, 6.7),
+                        'enemy_tank_3': (12, 4)}
+ENEMY_BASIC_SPEED = {'enemy_tank_1': 55,
+                     'enemy_tank_2': 65,
+                     'enemy_tank_3': 68}
+
+EFFECTS_IMG = {'explosion': [os.path.realpath(os.path.join(ROOT_DIR, f'assets/ready_assets/miscellaneous/effects/'
+                                                                     f'explosion/explosion_{i}.png'))
+                             for i in range(1, 17)]}
+
+# PLAY SCORE
+play_score = 0
+
+SCORE_LEADERBOARD_PATH = os.path.realpath(os.path.join(ROOT_DIR, 'score_leaders.json'))
