@@ -6,18 +6,13 @@ from scripts.game_states import GameStates as gs
 from scripts.ui_elements.scopes import Cross, Sight
 from scripts.ui_elements.camera import CameraGroup
 from scripts.sprites.enemies import Enemy, MovementDirection
+from scripts.ui_elements.text import draw_text
 
 screen = pygame.display.set_mode((cf.SCREEN_WIDTH, cf.SCREEN_HEIGHT))
 icon_image = pygame.image.load(cf.ICON_DIR)
 pygame.display.set_icon(icon_image)
 clock = pygame.time.Clock()
 pygame.event.set_grab(True)
-
-
-def draw_text(text, font_size, text_color, text_coord: tuple):
-    font = pygame.font.Font(cf.IN_GAME_FONT, font_size)
-    text_img = font.render(text, True, text_color)
-    pygame.display.get_surface().blit(text_img, text_coord)
 
 
 def draw_static_ui():
@@ -115,5 +110,5 @@ def limit_time_mode():
         clock.tick(cf.FPS)
     if not running:
         if not forced_escape:
-            pass
+            return gs.AFTER_GAME
         return gs.MAIN_MENU
