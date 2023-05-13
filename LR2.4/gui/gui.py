@@ -116,8 +116,10 @@ class GuiAtm(AtmInterface):
         cls.clear_window()
         cls.pin_attempts = 3
         money_vault = cls.atm.money_vault.money_vault
-        max_money_amount = int(0.6 * sum([banknote_status[0] * banknote_status[1] for banknote_status
+        max_money_amount = int(0.75 * sum([banknote_status[0] * banknote_status[1] for banknote_status
                                           in money_vault.items()]))
+        max_money_amount -= max_money_amount % (10**(len(str(max_money_amount)) - 1))
+        max_money_amount = int(max_money_amount)
         money_amount = tk.StringVar()
         available_banknotes = ' '.join(list(map(str, [banknote for banknote in money_vault.keys()
                                                       if money_vault[banknote] > 0])))
